@@ -107,7 +107,6 @@ public class AdminController {
             // Show ticket form.
             return "ticket";
         }
-
         return "redirect:/ticketList";
     }
 
