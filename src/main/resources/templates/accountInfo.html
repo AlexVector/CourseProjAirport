@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Панель управления</title>
+
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../static/css/custom1.css" th:href="@{/css/custom1.css}" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-7 left-wrapper">
+                <div class="event-banner-wrapper">
+                    <div class="logo">
+                        <h1>Сontrol Panel</h1>
+                    </div>
+                    <h2>Панель управления</h2>
+                </div>
+            </div>
+            <div class="col-sm-5 right-wrapper">
+                <div class="event-ticket-wrapper">
+                    <div class="event-tab">
+                        <!-- Навигация -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#buyTicket" aria-controls="buyTicket" role="tab" data-toggle="tab">Панель управления</a></li>
+                            <li role="presentation" ><a th:href="@{/ticketList}">Перечень билетов</a></li>
+                            <li role="presentation">
+                                <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+                                    <a th:href="@{/admin/orderList}">Список заказов</a>
+                                </th:block>
+                            </li>
+
+                            <li role="presentation">
+                                <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+                                    <a th:href="@{/admin/ticket}">Создать...</a>
+                                </th:block>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
+                                <div class="row">
+                                    <h1 style="text-align: center; margin-top: 50px">  Имя пользователя: <span th:utext="${#request.userPrincipal.name}"></span></h1>
+                                    <h3 style="text-align: center">Роль пользователя:</h3><h3 style="text-align: center" th:each="auth : ${userDetails.authorities}" th:utext="${auth.authority}"></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- plugins -->
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/allscript.js" th:src="@{/js/allscript.js}"></script>
+
+</body>
+</html>

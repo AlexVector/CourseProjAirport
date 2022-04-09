@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Создание билета</title>
+     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../static/css/custom.css" th:href="@{/css/custom.css}" rel="stylesheet">
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../static/colorlib/fonts/material-icon/css/material-design-iconic-font.min.css" th:href="@{colorlib/fonts/material-icon/css/material-design-iconic-font.min.css}">
+    <!-- Main css -->
+    <link rel="stylesheet" href="../static/colorlib/css/style.css" th:href="@{/colorlib/css/style.css}">
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+          <form  th:object="${ticketForm}" th:action="@{/admin/ticket}" class="appointment-form" id="appointment-form" method="POST" enctype="multipart/form-data">
+              <h2>Создание билета</h2>
+                <div class="form-group-1">
+                  <input th:field="*{newTicket}" type="hidden" />
+                  <input th:if="${ticketForm.newTicket}" placeholder="Идентификатор билета" type="text"
+                     th:field="*{code}" />  
+                  <th:block th:if="${!ticketForm.newTicket}">   
+                       <span th:utext="${ticketForm.code}"></span>   
+                       <input type="hidden" th:field="*{code}" />                                       
+                  </th:block>   
+               
+                  <span class="error-message" th:if="${#fields.hasErrors('code')}"  th:errors="*{code}">..</span>
+            <input th:field="*{name}" placeholder="Рейс" />
+                  <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+
+               <input th:field="*{price}"  placeholder="Стоимость($)"/>
+                  <span class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">..</span>
+           </div>
+                               
+                <div class="form-submit" style="display:flex; justify-content: space-around">
+                  <input type="submit" id="submit" class="submit" value="СОЗДАТЬ" />
+                  <input type="reset" id="submit" class="submit" value="СБРОСИТЬ" />
+           </div>
+        <a href="/ticketList" class="nav-item center col-md-12" style="text-decoration: none;text-align:center;display: flex;justify-content: center;font-weight: 600;color: #6f4db5;">Назад к билетам</a> </div>
+</form>
+    </div>
+    <!-- JS -->
+    <script src="../static/colorlib/vendor/jquery/jquery.min.js" th:src="@{/colorlib/vendor/jquery/jquery.min.js}"></script>
+    <script src="../static/colorlib/js/main.js" th:src="@{/colorlib/js/main.js}"></script>
+</body>
+</html>
