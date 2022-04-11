@@ -19,7 +19,7 @@
             <div class="col-sm-7 left-wrapper">
                 <div class="event-banner-wrapper">
                     <div class="logo">
-                        <h1>Сontrol Panel</h1>
+                        <h1>Панель упраления</h1>
                     </div>
                     <h2>Панель управления</h2>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
                                 <div class="row">
-                                    <h1 style="text-align: center; margin-top: 50px">  Имя пользователя: <span th:utext="${#request.userPrincipal.name}"></span></h1>
+                                    <h1 style="text-align: center; margin-top: 50px">Имя пользователя: <span th:utext="${#request.userPrincipal.name}"></span></h1>
                                     <h3 style="text-align: center">Роль пользователя:</h3><h3 style="text-align: center" th:each="auth : ${userDetails.authorities}" th:utext="${auth.authority}"></h3>
                                 </div>
                             </div>
