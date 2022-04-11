@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Order List</title>
+   
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom2.css}" rel="stylesheet">
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+</head>
+
+<body>
+
+   
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-5 left-wrapper">
+                <div class="event-banner-wrapper">
+                    <div class="logo">
+
+                    </div>
+
+                    <h2>
+                        Order <br> List
+                    </h2>
+                </div>
+            </div>
+
+            <div class="event-tab">
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
+                        <div class="row">
+                            <div>
+                                <div class="ticketBox" data-ticket-price="500">
+                                    <h3 class="center"> Total Order Count: &nbsp;
+                                    <div th:utext="${paginationResult.totalRecords}"></div> </h3>
+                                    <div class="inactiveStatus"></div>
+
+                                    <div class="row">
+                                        <div class="ticket">
+                                            <table class="tg col-md-12 ">
+                                                <tr>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Order Num</span><br></th>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Order Date</span></th>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Customer Name</span><br></th>
+                                                    <th class="tg-t87r">Customer Address</th>
+                                                    <th class="tg-t87r">Customer Email</th>
+                                                    <th class="tg-t87r">Amount</th>
+                                                    <th class="tg-t87r">View</th>
+                                                </tr>
+                                                <tr th:each="orderInfo : ${paginationResult.list}">
+                                                    <td class="tg-8h9k" th:utext="${orderInfo.orderNum}"></td>
+                                                    <td class="tg-8h9k" th:utext="${#dates.format(orderInfo.orderDate,'dd-MM-yyyy HH:mm')}"></td>
+                                                    <td class="tg-8h9k" th:utext="${orderInfo.customerName}"></td>
+                                                    <td class="tg-8h9k" th:utext="${orderInfo.customerAddress}"></td>
+                                                    <td class="tg-8h9k" th:utext="${orderInfo.customerEmail}"></td>
+                                                    <td class="tg-rapl" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}"></td>
+                                                    <td class="tg-8h9k"><a th:href="@{|/admin/order?orderId=${orderInfo.id}|}">View</a></td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                               
+                                            <div class="page-navigator" th:if="${paginationResult.totalPages > 1}">
+                                                <th:block th:each="page: ${paginationResult.navigationPages}">
+                                                    <a th:if="${page != -1}" class="nav-item" th:href="@{|/admin/orderList?page=${page}|}" th:utext="${page}"></a>
+
+                                                    <span th:if="${page == -1}" class="nav-item "> ... </span>
+                                                </th:block>
+                                                
+                                            </div>
+                                             <a th:href="@{/ticketList}" class="nav-item center col-sm-12 "> Back to tickets </a>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <!-- jQuery  -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- plugins -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/allscript.js}"></script>
+</body>
+
+</html>

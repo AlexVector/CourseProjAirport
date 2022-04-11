@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Оформление билета</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" th:href="@{colorlib/fonts/material-icon/css/material-design-iconic-font.min.css}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" th:href="@{/colorlib/css/style.css}">
+</head>
+   <body>
+    <div class="main">
+        <div class="container">
+          <form  th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}" class="appointment-form" id="appointment-form" method="POST">
+              <h2>Персональные данные</h2>
+                <div class="form-group-1">
+                  <span style="color: red; " class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+                   <input th:field="*{name}" placeholder="Ваше имя" />
+                  <span style="color: red; " class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+                   <input th:field="*{email}" placeholder="Ваша электронная почта" />
+                  <span style="color: red; " class="error-message"  th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
+                  <input th:field="*{phone}" placeholder="Ваш телефон" />
+                  <span style="color: red; " class="error-message" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
+                   <input th:field="*{address}" placeholder="Ваш адрес" />
+                <div class="form-submit" style="display:flex; justify-content: space-around">
+                  <input type="submit" id="submit" class="submit" value="Подтвердить" />
+           </div>
+        <a href="/ticketList" class="nav-item center col-md-12" style="text-decoration: none;text-align:center;display: flex;justify-content: center;font-weight: 600;color: #6f4db5;"> Назад к билетам </a> </div>
+</form>
+    </div>
+    <!-- JS -->
+    <script th:src="@{/colorlib/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/colorlib/js/main.js}"></script>
+</body>
+</html>
