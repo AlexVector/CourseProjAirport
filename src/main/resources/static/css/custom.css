@@ -275,6 +275,11 @@ label {
     font-size: 14px;
     font-weight: 400;
 }
+/*
+.tname{
+    margin-top: 5px;
+}
+ */
 
 .ticketBox .ticket-price-count-box .price {
     margin: 0;
