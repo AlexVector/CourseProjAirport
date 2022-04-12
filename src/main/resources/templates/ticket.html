@@ -16,7 +16,7 @@
     <div class="main">
         <div class="container">
           <form  th:object="${ticketForm}" th:action="@{/admin/ticket}" class="appointment-form" id="appointment-form" method="POST" enctype="multipart/form-data">
-              <h2>Создание билета</h2>
+              <h2>Создание (редактирование) билета</h2>
                 <div class="form-group-1">
                   <input th:field="*{newTicket}" type="hidden" />
                   <input th:if="${ticketForm.newTicket}" placeholder="Идентификатор билета" type="text"

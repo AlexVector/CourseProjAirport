@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Данные заказа</title>
+   
+    <!-- Bootstrap -->
+    <!-- Прописать hrefы -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom2.css}" rel="stylesheet">
+
+    <!-- fonts -->
+    <!-- Прописать hrefы -->
+    <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-5 left-wrapper">
+                <div class="event-banner-wrapper">
+                    <div class="logo"></div>
+                    <h2>Информация о <br> ЗАКАЗЕ</h2>
+                </div>
+            </div>
+
+            <div class="event-tab">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
+                        <div class="row">
+                            <div>
+                                <div class="ticketBox" data-ticket-price="500">
+                                    <div class="inactiveStatus"></div>
+                                    <div class="row">
+                                        <div class="ticket">
+                                             <div class="customer-info-container">
+                                                <h3>Пользовательская информация:</h3>
+                                                 <ul>
+                                                     <li>Имя: <span th:utext="${orderInfo.customerName}"></span></li>
+                                                     <li>Электронная почта: <span th:utext="${orderInfo.customerEmail}"></span></li>
+                                                     <li>Телефон: <span th:utext="${orderInfo.customerPhone}"></span></li>
+                                                     <li>Адрес: <span th:utext="${orderInfo.customerAddress}"></span></li>
+                                                 </ul>
+                                                 <h3>Итого по заказу:</h3>
+                                                 <ul>
+                                                     <li>Всего:
+                                                         <span class="total" style ="color: red" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}"></span>
+                                                     </li>
+                                                 </ul>
+                                             </div>
+                                            <table class="tg col-md-12 ">
+                                                <tr>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">ID билета</span><br></th>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Информация</span></th>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Количество</span><br></th>
+                                                    <th class="tg-t87r">Цена</th>
+                                                    <th class="tg-t87r">Всего</th>
+                                                   
+                                                </tr>
+                                                <tr th:each="orderDetailInfo : ${orderInfo.details}">
+                                                    <td th:utext="${orderDetailInfo.ticketCode}"></td>
+                                                    <td th:utext="${orderDetailInfo.ticketName}"></td>
+                                                    <td th:utext="${orderDetailInfo.quanity}"></td>
+                                                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA')}"></td>
+                                                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,3,2,'COMMA')}"></td>
+                                                 </tr>
+                                            </table>
+                                            <br>
+                                              <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+      <a class="nav-item center col-sm-12 " th:href="@{/admin/orderList}">Назад в перечень заказов</a>
+   </th:block> </div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery  -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- plugins -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/allscript.js}"></script>
+</body>
+
+</html>

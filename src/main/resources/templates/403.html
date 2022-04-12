@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Login Page</title>
+    <title>Авторизация</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1}">
 
@@ -24,18 +24,14 @@
 </head>
 
 <body>
-
     <div class="limiter">
         <div class="container-login100" >
             <div class="wrap-login100 p-t-30 p-b-50">
-               
-              
                 <form class="login100-form validate-form p-b-33 p-t-5" method="POST" th:action="@{/j_spring_security_check}">
-                <div class="page-title" style="text-align: center;" >Access Denied!</div>
-                <h3 style="color:red; text-align: center; margin-top: 20px" >Sorry, you can not  </h3> <h3 style="color:red; text-align: center">access this page!</h3>
+                <div class="page-title" style="text-align: center;" >Ошибка входа!</div>
+                <h3 style="color:red; text-align: center; margin-top: 20px" >Извините, Вы не можете </h3> <h3 style="color:red; text-align: center">получить доступ к этой странице!</h3>
                 <div class="container-login100-form-btn m-t-32">
-                    <button class="login100-form-btn" th:href="@{/admin/login}"> LOGIN						
-						</button>
+                    <button class="login100-form-btn" th:href="@{/admin/login}"> АВТОРИЗАЦИЯ</button>
                     </div>
                 </form>
             </div>

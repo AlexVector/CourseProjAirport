@@ -40,7 +40,7 @@
                             <li role="presentation" ><a th:href="@{/ticketList}">Билеты</a></li>
                             <li role="presentation">
                                 <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
-                                    <a th:href="@{/admin/orderList}">Все заказов</a>
+                                    <a th:href="@{/admin/orderList}">Все заказы</a>
                                 </th:block>
                             </li>
 

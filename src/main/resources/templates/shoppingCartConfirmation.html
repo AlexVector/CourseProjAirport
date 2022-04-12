@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Заказ</title>
+   
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/colorlib/css/style.css}">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom2.css}" rel="stylesheet">
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+</head>
+   <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-5 left-wrapper">
+                <div class="event-banner-wrapper">
+                    <div class="logo"></div>
+                    <h2>Данные по <br> ЗАКАЗУ</h2>
+                </div>
+            </div>
+            <div class="event-tab">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
+                        <div class="row">
+                            <div>
+                                <div class="ticketBox" data-ticket-price="500">
+                                    <div class="inactiveStatus"></div>
+                                    <div class="row">
+                                        <div class="ticket">
+                                            <div class="customer-info-container" style=" margin-left: 30px;">
+         <h3>Пользовательские данные:</h3>
+         <p>
+            <li>Имя: <span th:utext="${myCart.customerInfo.name}"></span></li>
+            <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
+            <li>Телефон: <span th:utext="${myCart.customerInfo.phone}"></span></li>
+            <li>Адрес: <span th:utext="${myCart.customerInfo.address}"></span></li>
+         </p>
+        <h3>Всего по заказу:</h3>
+         <ul>
+            <li>Количество: <span th:utext="${myCart.quantityTotal}"></span></li>
+            <li>Итого: &nbsp;
+               BYR<span class="total"
+                  th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}">  
+               </span>
+            </li>
+         </ul>
+      </div>
+      <form method="POST" th:action="@{/shoppingCartConfirmation}">
+         <a class="btn navi-item" th:href="@{/shoppingCart}" style="margin: 20px;background: #0f52c5;">Редактировать корзину</a>
+         <a class="navi-item btn" th:href="@{/shoppingCartCustomer}" style="background:#0f52c5; margin:20px;">Редактировать пользовательские данные</a>
+         <button type="submit" value="Send" class="btn" style="margin:20px;">Подтвердить</button>
+      </form>
+                                            <div  style="margin: 30px;">
+         <div  th:each="cartLineInfo : ${myCart.cartLines}">
+            <div>
+               <p>
+                  ID билета: <span th:utext="${cartLineInfo.ticketInfo.code}"></span>
+                  <input
+                     type="hidden" name="code" th:value="${cartLineInfo.ticketInfo.code}" />
+               </p>
+               <p>Название: <span th:utext="${cartLineInfo.ticketInfo.name}"></span></p>
+               <p>Стоимость:
+                  <span class="price"
+                     th:utext="${#numbers.formatDecimal(cartLineInfo.ticketInfo.price,3,2,'COMMA')}">
+                  </span> BYR
+               </p>
+               <p>Количество: <span th:utext="${cartLineInfo.quantity}"></span></p>
+               <p>Итого:
+                  <span class="subtotal"
+                     th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
+                  </span> BYR
+               </p>
+            </div>
+         </div>
+      </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/allscript.js}"></script>
+</body>
+</html>
