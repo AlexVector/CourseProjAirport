@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.config;
 
 import com.rusetskii.cp.service.UserDetailsServiceImpl;
@@ -36,31 +31,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    @Override
    protected void configure(HttpSecurity http) throws Exception {
       http.csrf().disable();
-      // Requires login with role ROLE_EMPLOYEE or ROLE_MANAGER.
-      // If not, it will redirect to /admin/login.
       http.authorizeRequests().antMatchers("/admin/orderList", "/admin/order", "/admin/accountInfo")//
             .access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
-      // Pages only for MANAGER
       http.authorizeRequests().antMatchers("/admin/ticket").access("hasRole('ROLE_MANAGER')");
-      // When user login, role XX.
-      // But access to the page requires the YY role,
-      // An AccessDeniedException will be thrown.
       http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
  
       // Configuration for Login Form.
-      http.authorizeRequests().and().formLogin()//
- 
-            //
+      http.authorizeRequests().and().formLogin()
             .loginProcessingUrl("/j_spring_security_check") // Submit URL
             .loginPage("/admin/login")//
             .defaultSuccessUrl("/admin/accountInfo")//
             .failureUrl("/admin/login?error=true")//
             .usernameParameter("userName")//
             .passwordParameter("password")
- 
-            // Configuration for the Logout page.
-            // (After logout, go to home page)
             .and().logout().logoutUrl("/admin/logout").logoutSuccessUrl("/");
- 
    }
 }

@@ -66,9 +66,9 @@
          <div  th:each="cartLineInfo : ${myCart.cartLines}">
             <div>
                <p>
-                  ID билета: <span th:utext="${cartLineInfo.ticketInfo.code}"></span>
+                  ID билета: <span th:utext="${cartLineInfo.ticketInfo.ticket_id}"></span>
                   <input
-                     type="hidden" name="code" th:value="${cartLineInfo.ticketInfo.code}" />
+                     type="hidden" name="code" th:value="${cartLineInfo.ticketInfo.ticket_id}" />
                </p>
                <p>Название: <span th:utext="${cartLineInfo.ticketInfo.name}"></span></p>
                <p>Стоимость:

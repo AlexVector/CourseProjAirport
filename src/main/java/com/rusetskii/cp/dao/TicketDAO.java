@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.dao;
-
 
 import com.rusetskii.cp.entity.Ticket;
 import com.rusetskii.cp.form.TicketForm;
@@ -28,45 +22,45 @@ public class TicketDAO {
     @Autowired
     private SessionFactory sessionFactory;
  
-    public Ticket findTicket(String code) {
+    public Ticket findTicket(String ticket_id) {
         try {
-            String sql = "Select e from " + Ticket.class.getName() + " e Where e.code =:code ";
+            String sql = "Select e from " + Ticket.class.getName() + " e Where e.ticket_id =:ticket_id ";
  
             Session session = this.sessionFactory.getCurrentSession();
             Query<Ticket> query = session.createQuery(sql, Ticket.class);
-            query.setParameter("code", code);
+            query.setParameter("ticket_id", ticket_id);
             return (Ticket) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
     }
  
-    public TicketInfo findTicketInfo(String code) {
-        Ticket ticket = this.findTicket(code);
+    public TicketInfo findTicketInfo(String ticket_id) {
+        Ticket ticket = this.findTicket(ticket_id);
         if (ticket == null) {
             return null;
         }
-        return new TicketInfo(ticket.getCode(), ticket.getName(), ticket.getPrice());
+        return new TicketInfo(ticket.getTicket_id(), ticket.getName(), ticket.getPrice());
     }
  
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void save(TicketForm ticketForm) {
  
         Session session = this.sessionFactory.getCurrentSession();
-        String code = ticketForm.getCode();
+        String ticket_id = ticketForm.getTicket_id();
  
         Ticket ticket = null;
  
         boolean isNew = false;
-        if (code != null) {
-            ticket = this.findTicket(code);
+        if (ticket_id != null) {
+            ticket = this.findTicket(ticket_id);
         }
         if (ticket == null) {
             isNew = true;
             ticket = new Ticket();
             ticket.setCreateDate(new Date());
         }
-        ticket.setCode(code);
+        ticket.setTicket_id(ticket_id);
         ticket.setName(ticketForm.getName());
         ticket.setPrice(ticketForm.getPrice());
  
@@ -83,7 +77,7 @@ public class TicketDAO {
     public PaginationResult<TicketInfo> queryTickets(int page, int maxResult, int maxNavigationPage,
                                                      String likeName) {
         String sql = "Select new " + TicketInfo.class.getName() //
-                + "(p.code, p.name, p.price) " + " from "//
+                + "(p.ticket_id, p.name, p.price) " + " from "//
                 + Ticket.class.getName() + " p ";
         if (likeName != null && likeName.length() > 0) {
             sql += " Where lower(p.name) like :likeName ";

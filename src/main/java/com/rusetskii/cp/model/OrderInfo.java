@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.model;
 
 import java.util.Date;
@@ -10,7 +5,7 @@ import java.util.List;
 
 public class OrderInfo {
  
-    private String id;
+    private String order_id;
     private Date orderDate;
     private int orderNum;
     private double amount;
@@ -27,10 +22,10 @@ public class OrderInfo {
     }
  
     // Using for Hibernate Query.
-    public OrderInfo(String id, Date orderDate, int orderNum, //
+    public OrderInfo(String order_id, Date orderDate, int orderNum, //
             double amount, String customerName, String customerAddress, //
             String customerEmail, String customerPhone) {
-        this.id = id;
+        this.order_id = order_id;
         this.orderDate = orderDate;
         this.orderNum = orderNum;
         this.amount = amount;
@@ -41,12 +36,10 @@ public class OrderInfo {
         this.customerPhone = customerPhone;
     }
  
-    public String getId() {
-        return id;
-    }
+    public String getOrder_id() {return order_id;}
  
-    public void setId(String id) {
-        this.id = id;
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
     }
  
     public Date getOrderDate() {

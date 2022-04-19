@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.dao;
 
 import com.rusetskii.cp.model.*;
@@ -48,7 +43,7 @@ public class OrderDAO {
         int orderNum = this.getMaxOrderNum() + 1;
         Order order = new Order();
  
-        order.setId(UUID.randomUUID().toString());
+        order.setOrder_id(UUID.randomUUID().toString());
         order.setOrderNum(orderNum);
         order.setOrderDate(new Date());
         order.setAmount(cartInfo.getAmountTotal());
@@ -71,8 +66,8 @@ public class OrderDAO {
             detail.setPrice(line.getTicketInfo().getPrice());
             detail.setQuanity(line.getQuantity());
  
-            String code = line.getTicketInfo().getCode();
-            Ticket ticket = this.ticketDAO.findTicket(code);
+            String ticket_id = line.getTicketInfo().getTicket_id();
+            Ticket ticket = this.ticketDAO.findTicket(ticket_id);
             detail.setTicket(ticket);
  
             session.persist(detail);
@@ -107,7 +102,7 @@ public class OrderDAO {
         if (order == null) {
             return null;
         }
-        return new OrderInfo(order.getId(), order.getOrderDate(), //
+        return new OrderInfo(order.getOrder_id(), order.getOrderDate(), //
                 order.getOrderNum(), order.getAmount(), order.getCustomerName(), //
                 order.getCustomerAddress(), order.getCustomerEmail(), order.getCustomerPhone());
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.form;
 
 import com.rusetskii.cp.entity.Ticket;
@@ -10,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
  
 public class TicketForm {
-    private String code;
+    private String ticket_id;
     private String name;
     private double price;
  
@@ -24,17 +19,17 @@ public class TicketForm {
     }
  
     public TicketForm(Ticket ticket) {
-        this.code = ticket.getCode();
+        this.ticket_id = ticket.getTicket_id();
         this.name = ticket.getName();
         this.price = ticket.getPrice();
     }
  
-    public String getCode() {
-        return code;
+    public String getTicket_id() {
+        return ticket_id;
     }
  
-    public void setCode(String code) {
-        this.code = code;
+    public void setTicket_id(String ticket_id) {
+        this.ticket_id = ticket_id;
     }
  
     public String getName() {

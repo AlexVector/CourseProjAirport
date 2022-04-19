@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
- 
 @Entity
 @Table(name = "Orders", //
         uniqueConstraints = { @UniqueConstraint(columnNames = "Order_Num") })
@@ -18,8 +12,8 @@ public class Order implements Serializable {
     private static final long serialVersionUID = -2576670215015463100L;
  
     @Id
-    @Column(name = "ID", length = 50)
-    private String id;
+    @Column(name = "Order_ID", length = 50)
+    private String order_id;
  
     @Column(name = "Order_Date", nullable = false)
     private Date orderDate;
@@ -42,12 +36,12 @@ public class Order implements Serializable {
     @Column(name = "Customer_Phone", length = 128, nullable = false)
     private String customerPhone;
  
-    public String getId() {
-        return id;
+    public String getOrder_id() {
+        return order_id;
     }
  
-    public void setId(String id) {
-        this.id = id;
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
     }
  
     public Date getOrderDate() {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.entity;
 
 import javax.persistence.*;
@@ -17,8 +12,8 @@ public class Ticket implements Serializable {
     private static final long serialVersionUID = -1000119078147252957L;
  
     @Id
-    @Column(name = "Code", length = 20, nullable = false)
-    private String code;
+    @Column(name = "Ticket_ID", length = 20, nullable = false)
+    private String ticket_id;
  
     @Column(name = "Name", length = 255, nullable = false)
     private String name;
@@ -32,11 +27,11 @@ public class Ticket implements Serializable {
     private Date createDate;
  
     public Ticket() {}
-    public String getCode() {
-        return code;
+    public String getTicket_id() {
+        return ticket_id;
     }
-    public void setCode(String code) {
-        this.code = code;
+    public void setTicket_id(String ticket_id) {
+        this.ticket_id = ticket_id;
     }
     public String getName() {
         return name;

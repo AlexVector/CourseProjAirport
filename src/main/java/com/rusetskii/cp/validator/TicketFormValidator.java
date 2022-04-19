@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.validator;
 
 import com.rusetskii.cp.dao.TicketDAO;
@@ -31,18 +26,18 @@ public class TicketFormValidator implements Validator {
       TicketForm ticketForm = (TicketForm) target;
  
       // Check the fields of TicketForm.
-      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "NotEmpty.ticketForm.code");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ticket_id", "NotEmpty.ticketForm.ticket_id");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.ticketForm.name");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.ticketForm.price");
  
-      String code = ticketForm.getCode();
-      if (code != null && code.length() > 0) {
-         if (code.matches("\\s+")) {
-            errors.rejectValue("code", "Pattern.ticketForm.code");
+      String ticket_id = ticketForm.getTicket_id();
+      if (ticket_id != null && ticket_id.length() > 0) {
+         if (ticket_id.matches("\\s+")) {
+            errors.rejectValue("ticket_id", "Pattern.ticketForm.ticket_id");
          } else if (ticketForm.isNewTicket()) {
-            Ticket ticket = ticketDAO.findTicket(code);
+            Ticket ticket = ticketDAO.findTicket(ticket_id);
             if (ticket != null) {
-               errors.rejectValue("code", "Duplicate.ticketForm.code");
+               errors.rejectValue("ticket_id", "Duplicate.ticketForm.ticket_id");
             }
          }
       }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rusetskii.cp.model;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +37,7 @@ public class CartInfo {
  
     private CartLineInfo findLineByCode(String code) {
         for (CartLineInfo line : this.cartLines) {
-            if (line.getTicketInfo().getCode().equals(code)) {
+            if (line.getTicketInfo().getTicket_id().equals(code)) {
                 return line;
             }
         }
@@ -50,7 +45,7 @@ public class CartInfo {
     }
  
     public void addTicket(TicketInfo ticketInfo, int quantity) {
-        CartLineInfo line = this.findLineByCode(ticketInfo.getCode());
+        CartLineInfo line = this.findLineByCode(ticketInfo.getTicket_id());
  
         if (line == null) {
             line = new CartLineInfo();
@@ -83,7 +78,7 @@ public class CartInfo {
     }
  
     public void removeTicket(TicketInfo ticketInfo) {
-        CartLineInfo line = this.findLineByCode(ticketInfo.getCode());
+        CartLineInfo line = this.findLineByCode(ticketInfo.getTicket_id());
         if (line != null) {
             this.cartLines.remove(line);
         }
@@ -117,7 +112,7 @@ public class CartInfo {
         if (cartForm != null) {
             List<CartLineInfo> lines = cartForm.getCartLines();
             for (CartLineInfo line : lines) {
-                this.updateTicket(line.getTicketInfo().getCode(), line.getQuantity());
+                this.updateTicket(line.getTicketInfo().getTicket_id(), line.getQuantity());
             }
         }
  

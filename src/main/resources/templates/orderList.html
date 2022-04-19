@@ -53,7 +53,7 @@
                                                     <td class="tg-8h9k" th:utext="${orderInfo.customerAddress}"></td>
                                                     <td class="tg-8h9k" th:utext="${orderInfo.customerEmail}"></td>
                                                     <td class="tg-rapl" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}"></td>
-                                                    <td class="tg-8h9k"><a th:href="@{|/admin/order?orderId=${orderInfo.id}|}">Подробнее...</a></td>
+                                                    <td class="tg-8h9k"><a th:href="@{|/admin/order?orderId=${orderInfo.order_id}|}">Подробнее...</a></td>
                                                 </tr>
                                             </table>
                                             <br>

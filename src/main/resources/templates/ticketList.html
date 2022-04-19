@@ -77,7 +77,7 @@
                                                     <div class="ticket-name">
                                                         <span th:utext="${prodInfo.name}"></span>
                                                         <span>Класс: эконом<br>
-                                                            <span style="display: flex;"> ID: &nbsp <span   th:utext="${prodInfo.code}"></span><span>
+                                                            <span style="display: flex;"> ID: &nbsp <span   th:utext="${prodInfo.ticket_id}"></span><span>
                                                        </span>
                                                     </div>
                                                 </div>
@@ -101,10 +101,10 @@
                                             <div class="ticket-description">
                                                 <p>
                                                       <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-                                                             <a style="color:#290ab3;" th:href="@{|/admin/ticket?code=${prodInfo.code}|}">Редактировать</a>
+                                                             <a style="color:#290ab3;" th:href="@{|/admin/ticket?ticket_id=${prodInfo.ticket_id}|}">Редактировать</a>
                                                         </th:block>
                                                    &nbsp; - Необходимо специальное разрешение. Войдите в систему как персонал, чтобы редактировать билет.  <!-- For Manager edit Ticket -->
-                                                            <li> <a style="color:#290ab3; text-transform: uppercase;" th:href="@{|/buyTicket?code=${prodInfo.code}|}">КУПИТЬ</a></li>
+                                                            <li> <a style="color:#290ab3; text-transform: uppercase;" th:href="@{|/buyTicket?ticket_id=${prodInfo.ticket_id}|}">КУПИТЬ</a></li>
                                             </div>
                                        </div>
                                      </div>

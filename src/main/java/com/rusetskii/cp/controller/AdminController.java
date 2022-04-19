@@ -49,24 +49,21 @@ public class AdminController {
         }
     }
 
-    // GET: Show Login Page
     @RequestMapping(value = { "/admin/login" }, method = RequestMethod.GET)
     public String login(Model model) {return "login";}
 
     @RequestMapping(value = { "/admin/accountInfo" }, method = RequestMethod.GET)
     public String accountInfo(Model model) {
-
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(userDetails.getPassword());
         System.out.println(userDetails.getUsername());
         System.out.println(userDetails.isEnabled());
-
         model.addAttribute("userDetails", userDetails);
         return "accountInfo";
     }
 
     @RequestMapping(value = { "/admin/orderList" }, method = RequestMethod.GET)
-    public String orderList(Model model, //
+    public String orderList(Model model,
                             @RequestParam(value = "page", defaultValue = "1") String pageStr) {
         int page = 1;
         try {
@@ -85,7 +82,7 @@ public class AdminController {
 
     // GET: Show ticket.
     @RequestMapping(value = { "/admin/ticket" }, method = RequestMethod.GET)
-    public String ticket(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
+    public String ticket(Model model, @RequestParam(value = "ticket_id", defaultValue = "") String code) {
         TicketForm ticketForm = null;
 
         if (code != null && code.length() > 0) {
@@ -118,7 +115,6 @@ public class AdminController {
             Throwable rootCause = ExceptionUtils.getRootCause(e);
             String message = rootCause.getMessage();
             model.addAttribute("errorMessage", message);
-            // Show ticket form.
             return "ticket";
         }
         return "redirect:/ticketList";
@@ -127,18 +123,13 @@ public class AdminController {
     @RequestMapping(value = { "/admin/order" }, method = RequestMethod.GET)
     public String orderView(Model model, @RequestParam("orderId") String orderId) {
         OrderInfo orderInfo = null;
-        if (orderId != null) {
+        if (orderId != null)
             orderInfo = this.orderDAO.getOrderInfo(orderId);
-        }
-        if (orderInfo == null) {
+        if (orderInfo == null)
             return "redirect:/admin/orderList";
-        }
         List<OrderDetailInfo> details = this.orderDAO.listOrderDetailInfos(orderId);
         orderInfo.setDetails(details);
-
         model.addAttribute("orderInfo", orderInfo);
-
         return "order";
     }
-
 }
