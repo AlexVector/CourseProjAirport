@@ -1,11 +1,13 @@
 package com.rusetskii.cp.controller;
 
 import com.rusetskii.cp.dao.OrderDAO;
+import com.rusetskii.cp.dao.PlaneDAO;
 import com.rusetskii.cp.dao.TicketDAO;
 import com.rusetskii.cp.entity.Ticket;
 import com.rusetskii.cp.form.CustomerForm;
 import com.rusetskii.cp.model.CartInfo;
 import com.rusetskii.cp.model.CustomerInfo;
+import com.rusetskii.cp.model.PlaneInfo;
 import com.rusetskii.cp.model.TicketInfo;
 import com.rusetskii.cp.pangination.PaginationResult;
 import com.rusetskii.cp.utils.Utils;
@@ -31,6 +33,9 @@ public class MainController {
 
     @Autowired
     private TicketDAO ticketDAO;
+
+    @Autowired
+    private PlaneDAO planeDAO;
 
     @Autowired
     private CustomerFormValidator customerFormValidator;
@@ -73,6 +78,18 @@ public class MainController {
                 maxResult, maxNavigationPage, likeName);
         model.addAttribute("paginationTickets", result);
         return "ticketList";
+    }
+
+    @RequestMapping({ "/planeList" })
+    public String listPlaneHandler(Model model, //
+                                    @RequestParam(value = "name", defaultValue = "") String likeName,
+                                    @RequestParam(value = "page", defaultValue = "1") int page) {
+        final int maxResult = 100;
+        final int maxNavigationPage = 10;
+        PaginationResult<PlaneInfo> result = planeDAO.queryPlanes(page, //
+                maxResult, maxNavigationPage, likeName);
+        model.addAttribute("paginationPlanes", result);
+        return "planeList";
     }
 
     @RequestMapping({ "/buyTicket" })
