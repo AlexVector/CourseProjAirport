@@ -70,6 +70,7 @@
                   <input
                      type="hidden" name="code" th:value="${cartLineInfo.ticketInfo.ticket_id}" />
                </p>
+               <p>ID самолета: <span th:utext="${cartLineInfo.ticketInfo.plane_id}"></span></p><!--тут мб косяк-->
                <p>Название: <span th:utext="${cartLineInfo.ticketInfo.name}"></span></p>
                <p>Стоимость:
                   <span class="price"

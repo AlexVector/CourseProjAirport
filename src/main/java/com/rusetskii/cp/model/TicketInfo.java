@@ -6,6 +6,7 @@ import com.rusetskii.cp.entity.Ticket;
  
 public class TicketInfo {
     private String ticket_id;
+    private String plane_id;
     private String name;
     private double price;
  
@@ -13,13 +14,15 @@ public class TicketInfo {
  
     public TicketInfo(Ticket ticket) {
         this.ticket_id = ticket.getTicket_id();
+        this.plane_id = ticket.getPlane().getPlane_id();
         this.name = ticket.getName();
         this.price = ticket.getPrice();
     }
  
     // Using in JPA/Hibernate query
-    public TicketInfo(String ticket_id, String name, double price) {
+    public TicketInfo(String ticket_id, String plane_id, String name, double price) {
         this.ticket_id = ticket_id;
+        this.plane_id = plane_id;
         this.name = name;
         this.price = price;
     }
@@ -29,6 +32,8 @@ public class TicketInfo {
     public void setTicket_id(String ticket_id) {
         this.ticket_id = ticket_id;
     }
+    public String getPlane_id() {return plane_id;}
+    public void setPlane_id(String plane_id) {this.plane_id = plane_id;}
     public String getName() {
         return name;
     }

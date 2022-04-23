@@ -14,6 +14,11 @@ public class Ticket implements Serializable {
     @Id
     @Column(name = "Ticket_ID", length = 20, nullable = false)
     private String ticket_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PLANE_ID", nullable = false, //
+            foreignKey = @ForeignKey(name = "TICKETS_PLANE_FK"))
+    private Plane plane;
  
     @Column(name = "Name", length = 255, nullable = false)
     private String name;
@@ -33,6 +38,8 @@ public class Ticket implements Serializable {
     public void setTicket_id(String ticket_id) {
         this.ticket_id = ticket_id;
     }
+    public Plane getPlane() {return plane;}
+    public void setPlane(Plane plane) {this.plane = plane;}
     public String getName() {
         return name;
     }

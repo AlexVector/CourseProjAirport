@@ -1,5 +1,6 @@
 package com.rusetskii.cp.dao;
 
+import com.rusetskii.cp.entity.Plane;
 import com.rusetskii.cp.entity.Ticket;
 import com.rusetskii.cp.form.TicketForm;
 import com.rusetskii.cp.model.TicketInfo;
@@ -40,7 +41,7 @@ public class TicketDAO {
         if (ticket == null) {
             return null;
         }
-        return new TicketInfo(ticket.getTicket_id(), ticket.getName(), ticket.getPrice());
+        return new TicketInfo(ticket.getTicket_id(), ticket.getPlane().getPlane_id(), ticket.getName(), ticket.getPrice());
     }
  
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
@@ -48,9 +49,7 @@ public class TicketDAO {
  
         Session session = this.sessionFactory.getCurrentSession();
         String ticket_id = ticketForm.getTicket_id();
- 
         Ticket ticket = null;
- 
         boolean isNew = false;
         if (ticket_id != null) {
             ticket = this.findTicket(ticket_id);
@@ -60,30 +59,29 @@ public class TicketDAO {
             ticket = new Ticket();
             ticket.setCreateDate(new Date());
         }
+        Plane plane = new Plane();
+        plane.setPlane_id(ticketForm.getPlane_id());
         ticket.setTicket_id(ticket_id);
+        ticket.setPlane(plane);
         ticket.setName(ticketForm.getName());
         ticket.setPrice(ticketForm.getPrice());
  
-        if (ticketForm.getFileData() != null) {
-            
-        }
-        if (isNew) {
-            session.persist(ticket);
-        }
-        // If error in DB, Exceptions will be thrown out immediately
+        if (ticketForm.getFileData() != null) {}
+
+        if (isNew) {session.persist(ticket);}
         session.flush();
     }
  
     public PaginationResult<TicketInfo> queryTickets(int page, int maxResult, int maxNavigationPage,
                                                      String likeName) {
-        String sql = "Select new " + TicketInfo.class.getName() //
-                + "(p.ticket_id, p.name, p.price) " + " from "//
+        String sql = "Select new " + TicketInfo.class.getName()
+                + "(p.ticket_id, p.plane.plane_id, p.name, p.price) " + " from "
                 + Ticket.class.getName() + " p ";
         if (likeName != null && likeName.length() > 0) {
             sql += " Where lower(p.name) like :likeName ";
         }
         sql += " order by p.createDate desc ";
-        // 
+
         Session session = this.sessionFactory.getCurrentSession();
         Query<TicketInfo> query = session.createQuery(sql, TicketInfo.class);
  

@@ -1,5 +1,6 @@
 package com.rusetskii.cp.dao;
 
+import com.rusetskii.cp.entity.Account;
 import com.rusetskii.cp.model.*;
 import com.rusetskii.cp.entity.Ticket;
 import com.rusetskii.cp.entity.Order;
@@ -62,6 +63,15 @@ public class OrderDAO {
             OrderDetail detail = new OrderDetail();
             detail.setId(UUID.randomUUID().toString());
             detail.setOrder(order);
+            //
+            //
+            //
+            Account account = new Account();
+            account.setUserName("Гость");
+            detail.setAccount(account);
+            //
+            //
+            //
             detail.setAmount(line.getAmount());
             detail.setPrice(line.getTicketInfo().getPrice());
             detail.setQuanity(line.getQuantity());
@@ -109,7 +119,7 @@ public class OrderDAO {
  
     public List<OrderDetailInfo> listOrderDetailInfos(String orderId) {
         String sql = "Select new " + OrderDetailInfo.class.getName() //
-                + "(d.id, d.ticket.code, d.ticket.name , d.quanity,d.price,d.amount) "//
+                + "(d.id, d.ticket.ticket_id, d.ticket.name , d.quanity,d.price,d.amount) "//
                 + " from " + OrderDetail.class.getName() + " d "//
                 + " where d.order.id = :orderId ";
  
@@ -119,5 +129,4 @@ public class OrderDAO {
  
         return query.getResultList();
     }
- 
 }

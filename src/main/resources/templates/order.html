@@ -7,14 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Данные заказа</title>
-   
-    <!-- Bootstrap -->
-    <!-- Прописать hrefы -->
+
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/custom2.css}" rel="stylesheet">
 
-    <!-- fonts -->
-    <!-- Прописать hrefы -->
     <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
 
@@ -57,6 +53,7 @@
                                              </div>
                                             <table class="tg col-md-12 ">
                                                 <tr>
+                                                    <!--<th class="tg-t87r"><span style="font-weight:700;font-style:normal">Имя аккаунта</span><br></th>-->
                                                     <th class="tg-t87r"><span style="font-weight:700;font-style:normal">ID билета</span><br></th>
                                                     <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Информация</span></th>
                                                     <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Количество</span><br></th>
@@ -65,6 +62,7 @@
                                                    
                                                 </tr>
                                                 <tr th:each="orderDetailInfo : ${orderInfo.details}">
+                                                    <!--<td th:utext="${orderDetailInfo.user_name}"></td>  мб косяк-->
                                                     <td th:utext="${orderDetailInfo.ticketCode}"></td>
                                                     <td th:utext="${orderDetailInfo.ticketName}"></td>
                                                     <td th:utext="${orderDetailInfo.quanity}"></td>

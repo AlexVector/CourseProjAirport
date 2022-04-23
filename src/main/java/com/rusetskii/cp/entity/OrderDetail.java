@@ -13,6 +13,11 @@ public class OrderDetail implements Serializable {
     @Id
     @Column(name = "ID", length = 50, nullable = false)
     private String id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_NAME", nullable = false, //
+            foreignKey = @ForeignKey(name = "ORDER_DETAIL_ACCOUNT_FK"))
+    private Account account;
  
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID", nullable = false, //
@@ -36,49 +41,39 @@ public class OrderDetail implements Serializable {
     public String getId() {
         return id;
     }
- 
     public void setId(String id) {
         this.id = id;
     }
- 
+    public Account getAccount() {return account;}
+    public void setAccount(Account account) {this.account = account;}
     public Order getOrder() {
         return order;
     }
- 
     public void setOrder(Order order) {
         this.order = order;
     }
- 
     public Ticket getTicket() {
         return ticket;
     }
- 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
- 
     public int getQuanity() {
         return quanity;
     }
- 
     public void setQuanity(int quanity) {
         this.quanity = quanity;
     }
- 
     public double getPrice() {
         return price;
     }
- 
     public void setPrice(double price) {
         this.price = price;
     }
- 
     public double getAmount() {
         return amount;
     }
- 
     public void setAmount(double amount) {
         this.amount = amount;
     }
- 
 }

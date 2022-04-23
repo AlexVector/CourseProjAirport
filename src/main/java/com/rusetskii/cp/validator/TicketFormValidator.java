@@ -14,8 +14,7 @@ public class TicketFormValidator implements Validator {
  
    @Autowired
    private TicketDAO ticketDAO;
- 
-   // This validator only checks for the TicketForm.
+
    @Override
    public boolean supports(Class<?> clazz) {
       return clazz == TicketForm.class;
@@ -27,6 +26,7 @@ public class TicketFormValidator implements Validator {
  
       // Check the fields of TicketForm.
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ticket_id", "NotEmpty.ticketForm.ticket_id");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "plane_id", "NotEmpty.ticketForm.plane_id");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.ticketForm.name");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.ticketForm.price");
  
@@ -41,6 +41,5 @@ public class TicketFormValidator implements Validator {
             }
          }
       }
-   } 
- 
+   }
 }

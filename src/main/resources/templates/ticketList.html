@@ -79,9 +79,9 @@
                                                 <div class="col-xs-6">
                                                     <div class="ticket-name">
                                                         <span th:utext="${prodInfo.name}"></span>
-                                                        <span>Класс: эконом<br>
-                                                            <span style="display: flex;"> ID: &nbsp <span   th:utext="${prodInfo.ticket_id}"></span><span>
-                                                       </span>
+                                                        <span>Класс: эконом</span>
+                                                        <span style="display: flex;"> ID: &nbsp <span   th:utext="${prodInfo.ticket_id}"></span></span>
+                                                        <span style="display: flex;"> ID самолета: &nbsp <span th:utext="${prodInfo.plane_id}"></span></span>
                                                     </div>
                                                 </div>
 
@@ -114,59 +114,6 @@
                                 </div>
                         </div>
                     </div>
-
-                            <!--Plane db update -->
-                            <!--
-                            <div role="tabpanel" class="tab-pane fade in active" id="showPlanes">
-                                <div class="row">
-                                    <div class="ticket-preview-container" th:each="prodInfo1 : ${paginationPlanes.list}">
-                                        <div class="col-md-6">
-                                            <div class="ticketBox" data-ticket-price = '100' >
-                                                <div class="inactiveStatus"></div>
-                                                <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <div class="ticket-name">
-                                                            <span th:utext="${prodInfo1.name}"></span>
-                                                            <span>Класс: эконом<br>
-                                                            <span style="display: flex;"> ID: &nbsp <span   th:utext="${prodInfo1.planes_id}"></span><span>
-                                                       </span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-xs-6">
-                                                        <div class="ticket-price-count-box">
-                                                            <div class="ticket-control">
-                                                            </div>
-
-                                                            <p class="price" style='margin-top: 15px;
-                                                            color: #000000;
-                                                            font-weight: 600;
-                                                            float: right;
-                                                            width: 100%;
-                                                            text-align: right;
-                                                            font-size: 22px;'>
-                                                                <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA')}"></span>BYR</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="ticket-description">
-                                                    <p>
-                                                        <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-                                                            <a style="color:#290ab3;" th:href="@{|/admin/ticket?ticket_id=${prodInfo1.plane_id}|}">Редактировать</a>
-                                                        </th:block>
-                                                        <p th:utext="${prodInfo1.info}"></p>
-                                                        &nbsp; - Необходимо специальное разрешение. Войдите в систему как персонал, чтобы редактировать самолет.
-                                                    <li> <a style="color:#290ab3; text-transform: uppercase;" th:href="@{|/buyTicket?ticket_id=${prodInfo.plane_id}|}">КУПИТЬ</a></li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            -->
-                            <!--------------------------------------->>
 
                     <div role="tabpanel" class="tab-pane fade" id="venue">
                         <div class=" widget widget_table-cell" data-gtm-vis-has-fired-7566271_199="1">
