@@ -48,7 +48,9 @@
                             <li role="presentation"><a href="#venue" aria-controls="venue" role="tab" data-toggle="tab">Аэропорт</a></li>
                             <!--<li role="presentation"><a href="#showPlanes" aria-controls="venue" role="tab" data-toggle="tab">Самолеты</a></li>-->
                             <li role="presentation"><a href="#termCondition" aria-controls="termCondition" role="tab" data-toggle="tab">Условия</a></li>
-                            
+                            <!--<li role="presentation"><a href="#chart" aria-controls="termCondition" role="tab" data-toggle="tab">График продаж</a></li>-->
+
+                            <li role="presentation"><a aria-controls="termCondition" role="tab" th:href="@{/sellChart}">График продаж</a></li>
                             
                             <li role="presentation">
                             <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">

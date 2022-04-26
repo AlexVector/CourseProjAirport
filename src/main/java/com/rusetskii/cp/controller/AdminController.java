@@ -21,7 +21,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Transactional
@@ -72,10 +74,8 @@ public class AdminController {
         }
         final int MAX_RESULT = 5;
         final int MAX_NAVIGATION_PAGE = 10;
-
         PaginationResult<OrderInfo> paginationResult //
                 = orderDAO.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
-
         model.addAttribute("paginationResult", paginationResult);
         return "orderList";
     }

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 @Transactional
@@ -90,6 +91,13 @@ public class MainController {
                 maxResult, maxNavigationPage, likeName);
         model.addAttribute("paginationPlanes", result);
         return "planeList";
+    }
+
+    @RequestMapping({ "/sellChart" })
+    public String orderChartHandler(Model model) {
+        Map<String, Integer> graphmap = orderDAO.getInfoForChart();
+        model.addAttribute("graphmap", graphmap);
+        return "sellChart";
     }
 
     @RequestMapping({ "/buyTicket" })

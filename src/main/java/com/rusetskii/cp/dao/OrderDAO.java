@@ -12,9 +12,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Transactional
 @Repository
@@ -35,6 +36,28 @@ public class OrderDAO {
             return 0;
         }
         return value;
+    }
+
+    public Map<String, Integer> getInfoForChart() {
+        String sql = "Select o.orderDate from " + Order.class.getName() + " o ";
+        Session session = this.sessionFactory.getCurrentSession();
+        Query<Date> query = session.createQuery(sql, Date.class);
+        Vector<String> vector = new Vector<String>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//        if (query != null){
+//
+//        }
+        for (int i=0; i<query.getResultList().size(); i++){
+            String str = dateFormat.format(query.getResultList().get(i));
+            String newstr = str.substring(0, 10);
+            vector.add(newstr);
+        }
+        Map<String, Integer> counter = new HashMap<>();
+        for (String x : vector) {
+            int newValue = counter.getOrDefault(x, 0) + 1;
+            counter.put(x, newValue);
+        }
+        return counter;
     }
  
     @Transactional(rollbackFor = Exception.class)
