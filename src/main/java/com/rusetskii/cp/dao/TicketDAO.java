@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
+import java.sql.SQLException;
 import java.util.Date;
 
 @Transactional
@@ -22,7 +23,18 @@ public class TicketDAO {
  
     @Autowired
     private SessionFactory sessionFactory;
- 
+
+
+    public void ticketDeleter(String ticket_id){
+        try{
+            Session session = this.sessionFactory.getCurrentSession();
+            Query query = session.createQuery("delete Ticket where ticket_id = :ticket_id");
+            query.setParameter("ticket_id", ticket_id);
+            int result = query.executeUpdate();
+        }catch (Exception e){}
+    }
+
+
     public Ticket findTicket(String ticket_id) {
         try {
             String sql = "Select e from " + Ticket.class.getName() + " e Where e.ticket_id =:ticket_id ";

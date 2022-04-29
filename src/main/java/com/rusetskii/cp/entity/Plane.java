@@ -21,6 +21,30 @@ public class Plane implements Serializable {
     private String info;
 
     public Plane() {}
+
+    public static class Builder{
+        private Plane newplane;
+
+        public Builder(){
+            newplane = new Plane();
+        }
+
+        public Builder id(String plane_id){
+            newplane.plane_id = plane_id;
+            return this;
+        }
+
+        public Builder name(String name){
+            newplane.name = name;
+            return this;
+        }
+
+        public Builder info(String info){
+            newplane.info = info;
+            return this;
+        }
+    }
+
     public String getPlane_id() {
         return plane_id;
     }

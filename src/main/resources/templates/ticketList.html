@@ -106,8 +106,11 @@
                                             <div class="ticket-description">
                                                 <p>
                                                       <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-                                                             <a style="color:#290ab3;" th:href="@{|/admin/ticket?ticket_id=${prodInfo.ticket_id}|}">Редактировать</a>
-                                                        </th:block>
+                                                             <a style="color:#290ab3;" th:href="@{|/admin/ticket?ticket_id=${prodInfo.ticket_id}|}">Редактировать</a><br>
+                                                      </th:block>
+                                                    <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+                                                        <a style="color:#290ab3;" th:href="@{|/admin/delTicket?ticket_id=${prodInfo.ticket_id}|}">Удалить</a><br>
+                                                    </th:block>
                                                    &nbsp; - Необходимо специальное разрешение. Войдите в систему как персонал, чтобы редактировать билет.  <!-- For Manager edit Ticket -->
                                                             <li> <a style="color:#290ab3; text-transform: uppercase;" th:href="@{|/buyTicket?ticket_id=${prodInfo.ticket_id}|}">КУПИТЬ</a></li>
                                             </div>
@@ -121,13 +124,13 @@
                         <div class=" widget widget_table-cell" data-gtm-vis-has-fired-7566271_199="1">
 <div class="widget__border-wrap" itemscope="" itemtype="http://schema.org/Airline">
 <h3 class="contacts__title" itemprop="name"><br>
-Boryspil International Airport</h3>
-<p class="contacts__phones"><span itemprop="telephone"><a href="tel:+380503980011">+38 (050) 398-00-11</a></span></p>
-<p class="contacts__time">08:00 - 19:00 (LT)</p>
-<p class="contacts__email" itemprop="email"><a href="mailto:lost.found@aeh.aero">lost.found@aeh.aero</a></p>
-<p class="contacts__text">Get information about baggage tracing online or at our Contact Center.</p><p>Once you have produced a detailed event concept and established that the event is viable, detailed venue planning can take place to progress from event concept to event implementation. The following activities should assist in this process:</p>
+Офис Belavia</h3>
+<p class="contacts__phones"><span itemprop="telephone"><a href="tel:+380503980011">+375 (33) 398-00-11</a></span></p>
+<p class="contacts__time">08:00 - 23:00 (LT)</p>
+<p class="contacts__email" itemprop="email"><a href="mailto:lost.found@aeh.aero">belavia@gmail.com</a></p>
+<p class="contacts__text">Получить более подробную информацию можно в контактном центре аэропорта.</p>
 </div>
-</div> <iframe src="https://www.google.com/maps/place/%D0%91%D0%B5%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0+%D0%90%D1%8D%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%82+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA/@53.8896468,28.0330136,17z/data=!3m1!4b1!4m5!3m4!1s0x46da36ea936f47cd:0xc81eaa6643a6700!8m2!3d53.8896468!4d28.0352023?hl=ru" width="640" height="300"></iframe>
+</div> <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A561996be644e95abc587dfa3938bc4a50785d1ddef803f3bfe8b8d5af1228651&amp;source=constructor" width="783" height="620" frameborder="0"></iframe>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="termCondition">
                         <div class="page-content_main-inner">
@@ -135,17 +138,17 @@ Boryspil International Airport</h3>
 <h1 class="page-title">
 </h1>
 </div>
-<h3><span style="font-weight: normal;">Perth Airport Online Services - Terms of Use</span></h3>
-<strong>1. Application of these Terms of Use
+<h3><span style="font-weight: normal;">Онлайн сервис аэропорта - Условия пользования</span></h3>
+<strong>1. Условия пользования
 </strong>
 <p>Perth Airport Pty Ltd (PAPL, we, our, us) owns and/or operates the PAPL mobile application (PAPL APP).</p>
-<p>PAPL also owns and/or operates “Online Services” including:</p>
+<p>Условия пользования данным онлайн-сервисом включают:</p>
 <ul>
-<li><span style="font-weight: lighter;">our website;</span></li>
+<li><span style="font-weight: lighter;">это вебсайт;</span></li>
 <li><span style="font-weight: lighter;">WiFi;</span></li>
-<li><span style="font-weight: lighter;">free internet services;</span></li>
-<li><span style="font-weight: lighter;">email subscriptions; and&nbsp;</span></li>
-<li><span style="font-weight: lighter;">our social media platforms such as our Facebook page.</span></li>
+<li><span style="font-weight: lighter;">бесплатные интернет-сервисы;</span></li>
+<li><span style="font-weight: lighter;">новостная рассылка; и&nbsp;</span></li>
+<li><span style="font-weight: lighter;">наши аккаунты в социальных сетях.</span></li>
 </ul>
 We provide the PAPL App and Online Services for members of the public and other users (Users) to access and share information.
 <div>&nbsp;<br>

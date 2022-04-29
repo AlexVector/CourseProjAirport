@@ -47,12 +47,7 @@ public class MainController {
         if (target == null)
             return;
         System.out.println("Target=" + target);
-        // Case update quantity in cart
-        // (@ModelAttribute("cartForm") @Validated CartInfo cartForm)
         if (target.getClass() == CartInfo.class) {}
-
-        // Case save customer information.
-        // (@ModelAttribute @Validated CustomerInfo customerForm)
         else if (target.getClass() == CustomerForm.class) {
             dataBinder.setValidator(customerFormValidator);
         }
@@ -81,6 +76,11 @@ public class MainController {
         return "ticketList";
     }
 
+    public PaginationResult<PlaneInfo> hardListPlaneHandler(String likeName, int page, int maxResult, int maxNavigationPage){
+        PaginationResult<PlaneInfo> result = planeDAO.queryPlanes(page, maxResult, maxNavigationPage, likeName);
+        return result;
+    }
+
     @RequestMapping({ "/planeList" })
     public String listPlaneHandler(Model model, //
                                     @RequestParam(value = "name", defaultValue = "") String likeName,
@@ -91,6 +91,11 @@ public class MainController {
                 maxResult, maxNavigationPage, likeName);
         model.addAttribute("paginationPlanes", result);
         return "planeList";
+    }
+
+    public Map<String, Integer> hardOrderChartHandler(){
+        Map<String, Integer> result = orderDAO.getInfoForChart();
+        return result;
     }
 
     @RequestMapping({ "/sellChart" })
@@ -159,6 +164,7 @@ public class MainController {
         return "shoppingCartCustomer";
     }
 
+
     // POST: Save customer information.
     @RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.POST)
     public String shoppingCartCustomerSave(HttpServletRequest request,
@@ -188,7 +194,10 @@ public class MainController {
         return "shoppingCartConfirmation";
     }
 
-    // POST: Submit Cart (Save)
+    public void hardShoppingCartConfirmation(CartInfo cartInfo){
+        orderDAO.saveOrder(cartInfo);
+    }
+
     @RequestMapping(value = { "/shoppingCartConfirmation" }, method = RequestMethod.POST)
     public String shoppingCartConfirmationSave(HttpServletRequest request, Model model) {
         CartInfo cartInfo = Utils.getCartInSession(request);

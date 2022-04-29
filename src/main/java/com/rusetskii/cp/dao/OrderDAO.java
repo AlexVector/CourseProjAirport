@@ -39,14 +39,12 @@ public class OrderDAO {
     }
 
     public Map<String, Integer> getInfoForChart() {
-        String sql = "Select o.orderDate from " + Order.class.getName() + " o ";
+        String sql = "Select o.orderDate from " + Order.class.getName() + " o "
+                + "order by o.orderDate asc";
         Session session = this.sessionFactory.getCurrentSession();
         Query<Date> query = session.createQuery(sql, Date.class);
         Vector<String> vector = new Vector<String>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//        if (query != null){
-//
-//        }
         for (int i=0; i<query.getResultList().size(); i++){
             String str = dateFormat.format(query.getResultList().get(i));
             String newstr = str.substring(0, 10);
@@ -86,15 +84,9 @@ public class OrderDAO {
             OrderDetail detail = new OrderDetail();
             detail.setId(UUID.randomUUID().toString());
             detail.setOrder(order);
-            //
-            //
-            //
             Account account = new Account();
             account.setUserName("Гость");
             detail.setAccount(account);
-            //
-            //
-            //
             detail.setAmount(line.getAmount());
             detail.setPrice(line.getTicketInfo().getPrice());
             detail.setQuanity(line.getQuantity());

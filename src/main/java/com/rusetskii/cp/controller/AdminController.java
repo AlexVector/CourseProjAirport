@@ -1,8 +1,11 @@
 package com.rusetskii.cp.controller;
 
 import com.rusetskii.cp.dao.OrderDAO;
+import com.rusetskii.cp.dao.PlaneDAO;
 import com.rusetskii.cp.dao.TicketDAO;
+import com.rusetskii.cp.entity.Plane;
 import com.rusetskii.cp.entity.Ticket;
+import com.rusetskii.cp.form.PlaneForm;
 import com.rusetskii.cp.form.TicketForm;
 import com.rusetskii.cp.model.OrderDetailInfo;
 import com.rusetskii.cp.model.OrderInfo;
@@ -34,6 +37,9 @@ public class AdminController {
 
     @Autowired
     private TicketDAO ticketDAO;
+
+    @Autowired
+    private PlaneDAO planeDAO;
 
     @Autowired
     private TicketFormValidator ticketFormValidator;
@@ -99,6 +105,13 @@ public class AdminController {
         return "ticket";
     }
 
+    @RequestMapping(value = { "/admin/delTicket" }, method = RequestMethod.GET)
+    public String deleteTicket(Model model, @RequestParam(value = "ticket_id", defaultValue = "") String code) {
+        if (code != null && code.length() > 0)
+            ticketDAO.ticketDeleter(code);
+        return "redirect:/ticketList";
+    }
+
     // POST: Save ticket
     @RequestMapping(value = { "/admin/ticket" }, method = RequestMethod.POST)
     public String ticketSave(Model model, //
@@ -118,6 +131,63 @@ public class AdminController {
             return "ticket";
         }
         return "redirect:/ticketList";
+    }
+
+    public void hardplaneSave(PlaneForm planeForm){
+        planeDAO.save(planeForm);
+    }
+
+    public void hardticketSave(TicketForm ticketForm){
+        ticketDAO.save(ticketForm);
+    }
+
+    // POST: Save ticket
+    @RequestMapping(value = { "/admin/plane" }, method = RequestMethod.POST)
+    public String planeSave(Model model, //
+                             @ModelAttribute("planeForm") @Validated PlaneForm planeForm, //
+                             BindingResult result, //
+                             final RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "plane";
+        }
+        try {
+            planeDAO.save(planeForm);
+        } catch (Exception e) {
+            Throwable rootCause = ExceptionUtils.getRootCause(e);
+            String message = rootCause.getMessage();
+            model.addAttribute("errorMessage", message);
+            return "plane";
+        }
+        return "redirect:/planeList";
+    }
+
+    @RequestMapping(value = { "/admin/plane" }, method = RequestMethod.GET)
+    public String plane(Model model, @RequestParam(value = "plane_id", defaultValue = "") String code) {
+        PlaneForm planeForm = null;
+
+        if (code != null && code.length() > 0) {
+            Plane plane = planeDAO.findPlane(code);
+            if (plane != null) {planeForm = new PlaneForm(plane);}
+        }
+        if (planeForm == null) {
+            planeForm = new PlaneForm();
+            planeForm.setNewPlane(true);
+        }
+        model.addAttribute("planeForm", planeForm);
+        return "plane";
+    }
+
+    @RequestMapping(value = { "/admin/delPlane" }, method = RequestMethod.GET)
+    public String deletePlane(Model model, @RequestParam(value = "plane_id", defaultValue = "") String code) {
+        if (code != null && code.length() > 0)
+            planeDAO.planeDeleter(code);
+        return "redirect:/planeList";
+    }
+
+    public List<OrderDetailInfo> hardOrderView(String orderId){
+        OrderInfo orderInfo = null;
+        List<OrderDetailInfo> details = this.orderDAO.listOrderDetailInfos(orderId);
+        return details;
     }
 
     @RequestMapping(value = { "/admin/order" }, method = RequestMethod.GET)

@@ -19,6 +19,15 @@ public class PlaneDAO {
  
     @Autowired
     private SessionFactory sessionFactory;
+
+    public void planeDeleter(String plane_id){
+        try{
+            Session session = this.sessionFactory.getCurrentSession();
+            Query query = session.createQuery("delete Plane where plane_id = :plane_id");
+            query.setParameter("plane_id", plane_id);
+            int result = query.executeUpdate();
+        }catch (Exception e){}
+    }
  
     public Plane findPlane(String plane_id) {
         try {

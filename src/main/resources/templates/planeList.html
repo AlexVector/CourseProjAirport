@@ -51,8 +51,7 @@
 
                              <li role="presentation">
                             <th:block sec:authorize="hasRole('ROLE_MANAGER')">
-                                <!-- доделать страницу добавления/редактирования билетов -->
-                                <a th:href="@{/admin/planes}">Добавить самолет</a>
+                                <a th:href="@{/admin/plane}">Добавить самолет</a>
                              </th:block>
                             </li>
                             <li role="presentation"><a aria-controls="termCondition" role="tab" th:href="@{/shoppingCart}">МОИ БИЛЕТЫ</a></li>
@@ -87,7 +86,10 @@
                                                 <div class="ticket-description">
                                                     <p>
                                                         <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-                                                            <a style="color:#290ab3;" th:href="@{|/admin/ticket?ticket_id=${prodInfo1.plane_id}|}">Редактировать</a>
+                                                            <a style="color:#290ab3;" th:href="@{|/admin/plane?plane_id=${prodInfo1.plane_id}|}">Редактировать</a><br>
+                                                        </th:block>
+                                                        <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+                                                            <a style="color:#290ab3;" th:href="@{|/admin/delPlane?plane_id=${prodInfo1.plane_id}|}">Удалить</a><br>
                                                         </th:block>
                                                         <p th:utext="${prodInfo1.info}">
                                                     </p>
